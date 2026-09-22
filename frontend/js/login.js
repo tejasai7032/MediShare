@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:5050/api";
+const API_BASE_URL =
+    "https://medishare-4h7g.onrender.com/api";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -85,7 +86,7 @@ async function handleLogin(
     try {
 
         console.log(
-            "Sending login request..."
+            "Sending login request to Render..."
         );
 
 
@@ -168,18 +169,10 @@ async function handleLogin(
                 data.user.role === "ADMIN"
             ) {
 
-                console.log(
-                    "Redirecting to admin.html"
-                );
-
                 window.location.href =
                     "/admin.html";
 
             } else {
-
-                console.log(
-                    "Redirecting to dashboard.html"
-                );
 
                 window.location.href =
                     "/dashboard.html";
