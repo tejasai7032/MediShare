@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MediShare | Administration</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           ADMIN PAGE
+           ===================================================== */
+
+        .admin-page {
+            min-height: 100vh;
+            background: #f4f7fb;
+        }
+
+
+        .admin-main {
+            padding: 42px;
+            width: 100%;
+        }
+
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+
+        .admin-eyebrow {
+            display: block;
+            color: #2477ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #0b1b32;
+        }
+
+
+        .admin-header p {
+            margin: 10px 0 0;
+            color: #71819b;
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           STATS
+           ===================================================== */
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+
+        .admin-stat-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 12px 35px rgba(20, 42, 75, 0.08);
+        }
+
+
+        .admin-stat-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e9f2ff;
+            color: #2477ff;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+
+        .admin-stat-icon.pending {
+            background: #fff4df;
+            color: #d88900;
+        }
+
+
+        .admin-stat-card span {
+            display: block;
+            color: #8492a8;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+        .admin-stat-card strong {
+            display: block;
+            margin-top: 5px;
+            color: #0b1b32;
+            font-size: 30px;
+        }
+
+
+        /* =====================================================
+           TOOLBAR
+           ===================================================== */
+
+        .admin-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+
+        .admin-search-wrapper {
+            position: relative;
+            flex: 1;
+            max-width: 500px;
+        }
+
+
+        .admin-search-wrapper input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dce4ef;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 18px 14px 45px;
+            font-size: 14px;
+            outline: none;
+        }
+
+
+        .admin-search-wrapper input:focus {
+            border-color: #2477ff;
+            box-shadow: 0 0 0 3px rgba(36, 119, 255, 0.1);
+        }
+
+
+        .admin-search-icon {
+            position: absolute;
+            left: 17px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8997ab;
+            font-size: 20px;
+            z-index: 2;
+        }
+
+
+        .admin-refresh-button {
+            border: none;
+            border-radius: 14px;
+            background: #0b1b32;
+            color: #ffffff;
+            padding: 14px 22px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+
+        .admin-refresh-button:hover {
+            background: #162d4c;
+        }
+
+
+        /* =====================================================
+           MESSAGES
+           ===================================================== */
+
+        .admin-message {
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .admin-message.success {
+            background: #e8f8ef;
+            color: #187344;
+        }
+
+
+        .admin-message.error {
+            background: #fff0f0;
+            color: #b42318;
+        }
+
+
+        /* =====================================================
+           LOADING
+           ===================================================== */
+
+        .admin-loading {
+            padding: 60px 20px;
+            text-align: center;
+            background: #ffffff;
+            border-radius: 20px;
+        }
+
+
+        .admin-spinner {
+            width: 34px;
+            height: 34px;
+            border: 4px solid #e4ebf4;
+            border-top-color: #2477ff;
+            border-radius: 50%;
+            animation: adminSpin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+
+        @keyframes adminSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =====================================================
+           EMPTY
+           ===================================================== */
+
+        .admin-empty {
+            padding: 65px 20px;
+            text-align: center;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(20, 42, 75, 0.06);
+        }
+
+
+        .admin-empty-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #e8f8ef;
+            color: #1d8b55;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+
+        .admin-empty h3 {
+            margin: 0 0 8px;
+            color: #0b1b32;
+            font-size: 20px;
+        }
+
+
+        .admin-empty p {
+            margin: 0;
+            color: #7d8ba1;
+        }
+
+
+        /* =====================================================
+           ORGANIZATION CARDS
+           ===================================================== */
+
+        .organization-admin-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(320px, 1fr)
+            );
+            gap: 22px;
+        }
+
+
+        .organization-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 12px 35px rgba(20, 42, 75, 0.08);
+            border: 1px solid #edf1f7;
+        }
+
+
+        .organization-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+
+        .organization-card-title {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+
+        .organization-logo {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            background: #eaf2ff;
+            color: #2477ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 19px;
+        }
+
+
+        .organization-card h3 {
+            margin: 0;
+            color: #0b1b32;
+            font-size: 18px;
+        }
+
+
+        .organization-type {
+            display: block;
+            margin-top: 4px;
+            color: #8492a8;
+            font-size: 13px;
+        }
+
+
+        .pending-badge {
+            background: #fff3d9;
+            color: #b46a00;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+
+        .organization-details {
+            border-top: 1px solid #edf1f7;
+            border-bottom: 1px solid #edf1f7;
+            padding: 17px 0;
+            margin-bottom: 18px;
+        }
+
+
+        .organization-detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 11px;
+        }
+
+
+        .organization-detail:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .organization-detail-label {
+            color: #8997ab;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        .organization-detail-value {
+            color: #25364e;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: right;
+            word-break: break-word;
+        }
+
+
+        .organization-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+
+        .approve-button,
+        .reject-button {
+            border: none;
+            border-radius: 12px;
+            padding: 13px 15px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+
+        .approve-button {
+            background: #0b8f58;
+            color: #ffffff;
+        }
+
+
+        .approve-button:hover {
+            background: #087848;
+        }
+
+
+        .reject-button {
+            background: #fff0f0;
+            color: #c62c2c;
+            border: 1px solid #ffd4d4;
+        }
+
+
+        .reject-button:hover {
+            background: #ffe2e2;
+        }
+
+
+        .approve-button:disabled,
+        .reject-button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .admin-main {
+                padding: 25px;
+            }
+
+            .admin-header {
+                align-items: flex-start;
+            }
+
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .admin-main {
+                padding: 18px;
+            }
+
+            .admin-header h1 {
+                font-size: 28px;
+            }
+
+            .admin-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .admin-search-wrapper {
+                max-width: none;
+            }
+
+            .organization-actions {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="admin-page">
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <nav class="top-navbar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                M
+            </div>
+
+            <div class="brand-text">
+
+                <strong>
+                    MediShare
+                </strong>
+
+                <span>
+                    Healthcare Resource Network
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <div class="nav-user">
+
+                <div
+                    class="nav-avatar"
+                    id="navAvatar"
+                >
+                    A
+                </div>
+
+                <div class="nav-user-info">
+
+                    <strong id="navUserName">
+                        MediShare Admin
+                    </strong>
+
+                    <span>
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- HEADER -->
+
+        <header class="admin-header">
+
+            <div>
+
+                <span class="admin-eyebrow">
+                    ADMINISTRATION
+                </span>
+
+                <h1>
+                    Organization Verification
+                </h1>
+
+                <p>
+                    Review healthcare organizations before
+                    granting verified MediShare access.
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- STATS -->
+
+        <section class="admin-stats">
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon pending">
+                    !
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending Review
+                    </span>
+
+                    <strong id="pendingCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Verification Queue
+                    </span>
+
+                    <strong id="queueCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- TOOLBAR -->
+
+        <section class="admin-toolbar">
+
+            <div class="admin-search-wrapper">
+
+                <span class="admin-search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="search"
+                    id="organizationSearch"
+                    placeholder="Search organizations..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                id="refreshOrganizations"
+                class="admin-refresh-button"
+            >
+                ↻ Refresh
+            </button>
+
+        </section>
+
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="adminMessage"
+            class="admin-message"
+            style="display: none;"
+        ></div>
+
+
+
+        <!-- LOADING -->
+
+        <div
+            id="adminLoading"
+            class="admin-loading"
+            style="display: none;"
+        >
+
+            <div class="admin-spinner"></div>
+
+            <p>
+                Loading organizations...
+            </p>
+
+        </div>
+
+
+
+        <!-- EMPTY -->
+
+        <div
+            id="adminEmpty"
+            class="admin-empty"
+            style="display: none;"
+        >
+
+            <div class="admin-empty-icon">
+                ✓
+            </div>
+
+            <h3>
+                No pending organizations
+            </h3>
+
+            <p>
+                All organization registrations have
+                been reviewed.
+            </p>
+
+        </div>
+
+
+
+        <!-- ORGANIZATION CARDS -->
+
+        <section
+            id="organizationGrid"
+            class="organization-admin-grid"
+        ></section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         ADMIN JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const API_BASE_URL =
+            "http://localhost:5050/api";
+
+
+        let organizations = [];
+
+
+        /* =====================================================
+           GET ELEMENTS
+           ===================================================== */
+
+        const organizationGrid =
+            document.getElementById(
+                "organizationGrid"
+            );
+
+        const organizationSearch =
+            document.getElementById(
+                "organizationSearch"
+            );
+
+        const pendingCount =
+            document.getElementById(
+                "pendingCount"
+            );
+
+        const queueCount =
+            document.getElementById(
+                "queueCount"
+            );
+
+        const adminMessage =
+            document.getElementById(
+                "adminMessage"
+            );
+
+        const adminLoading =
+            document.getElementById(
+                "adminLoading"
+            );
+
+        const adminEmpty =
+            document.getElementById(
+                "adminEmpty"
+            );
+
+        const refreshButton =
+            document.getElementById(
+                "refreshOrganizations"
+            );
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+        const navUserName =
+            document.getElementById(
+                "navUserName"
+            );
+
+        const navAvatar =
+            document.getElementById(
+                "navAvatar"
+            );
+
+
+
+        /* =====================================================
+           PAGE START
+           ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                console.log(
+                    "MediShare Admin page loaded"
+                );
+
+                initializeAdmin();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           INITIALIZE
+           ===================================================== */
+
+        function initializeAdmin() {
+
+            const token =
+                localStorage.getItem(
+                    "medishare_token"
+                );
+
+            const storedUser =
+                localStorage.getItem(
+                    "medishare_user"
+                );
+
+
+            console.log(
+                "Token exists:",
+                Boolean(token)
+            );
+
+            console.log(
+                "Stored user:",
+                storedUser
+            );
+
+
+            if (!token || !storedUser) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            let user;
+
+            try {
+
+                user =
+                    JSON.parse(
+                        storedUser
+                    );
+
+            } catch (error) {
+
+                console.error(
+                    "Invalid stored user:",
+                    error
+                );
+
+                logout();
+
+                return;
+
+            }
+
+
+            console.log(
+                "Current user:",
+                user
+            );
+
+
+            if (
+                !user ||
+                user.role !== "ADMIN"
+            ) {
+
+                alert(
+                    "Administrator access required."
+                );
+
+                window.location.href =
+                    "dashboard.html";
+
+                return;
+
+            }
+
+
+            const displayName =
+                user.name ||
+                "MediShare Admin";
+
+
+            navUserName.textContent =
+                displayName;
+
+
+            navAvatar.textContent =
+                displayName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            loadPendingOrganizations();
+
+        }
+
+
+
+        /* =====================================================
+           LOAD PENDING ORGANIZATIONS
+           ===================================================== */
+
+        async function loadPendingOrganizations() {
+
+            const token =
+                localStorage.getItem(
+                    "medishare_token"
+                );
+
+
+            if (!token) {
+
+                logout();
+
+                return;
+
+            }
+
+
+            showLoading(true);
+
+            hideMessage();
+
+
+            try {
+
+                console.log(
+                    "Requesting pending organizations..."
+                );
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/organizations/verification/pending`,
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+
+                console.log(
+                    "Pending organizations status:",
+                    response.status
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Pending organizations response:",
+                    data
+                );
+
+
+                if (
+                    response.status === 401
+                ) {
+
+                    logout();
+
+                    return;
+
+                }
+
+
+                if (
+                    response.status === 403
+                ) {
+
+                    showMessage(
+                        "Administrator access required.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        data.error ||
+                        "Failed to load organizations."
+                    );
+
+                }
+
+
+                organizations =
+                    Array.isArray(
+                        data.organizations
+                    )
+                        ? data.organizations
+                        : [];
+
+
+                pendingCount.textContent =
+                    organizations.length;
+
+
+                queueCount.textContent =
+                    organizations.length;
+
+
+                renderOrganizations();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Admin loading error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Unable to load organizations.",
+                    "error"
+                );
+
+            } finally {
+
+                showLoading(false);
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           RENDER ORGANIZATIONS
+           ===================================================== */
+
+        function renderOrganizations() {
+
+            const searchTerm =
+                organizationSearch
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const filtered =
+                organizations.filter(
+                    organization => {
+
+                        const name =
+                            organization.name ||
+                            "";
+
+                        const type =
+                            organization.type ||
+                            "";
+
+                        const city =
+                            organization.city ||
+                            "";
+
+                        const registrationNumber =
+                            organization.registrationNumber ||
+                            "";
+
+
+                        return (
+                            name.toLowerCase().includes(searchTerm) ||
+                            type.toLowerCase().includes(searchTerm) ||
+                            city.toLowerCase().includes(searchTerm) ||
+                            registrationNumber.toLowerCase().includes(searchTerm)
+                        );
+
+                    }
+                );
+
+
+            organizationGrid.innerHTML = "";
+
+
+            if (filtered.length === 0) {
+
+                organizationGrid.style.display =
+                    "none";
+
+                adminEmpty.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            adminEmpty.style.display =
+                "none";
+
+            organizationGrid.style.display =
+                "grid";
+
+
+            filtered.forEach(
+                organization => {
+
+                    const card =
+                        createOrganizationCard(
+                            organization
+                        );
+
+
+                    organizationGrid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           CREATE ORGANIZATION CARD
+           ===================================================== */
+
+        function createOrganizationCard(
+            organization
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "organization-card";
+
+
+            const organizationName =
+                organization.name ||
+                "Unnamed Organization";
+
+
+            const organizationType =
+                organization.type ||
+                "Healthcare Organization";
+
+
+            const initial =
+                organizationName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            card.innerHTML = `
+
+                <div class="organization-card-header">
+
+                    <div class="organization-card-title">
+
+                        <div class="organization-logo">
+                            ${escapeHtml(initial)}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                ${escapeHtml(
+                                    organizationName
+                                )}
+                            </h3>
+
+                            <span class="organization-type">
+                                ${escapeHtml(
+                                    organizationType
+                                )}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="pending-badge">
+                        PENDING
+                    </span>
+
+                </div>
+
+
+                <div class="organization-details">
+
+                    <div class="organization-detail">
+
+                        <span class="organization-detail-label">
+                            Registration No.
+                        </span>
+
+                        <span class="organization-detail-value">
+                            ${escapeHtml(
+                                organization.registrationNumber ||
+                                "-"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="organization-detail">
+
+                        <span class="organization-detail-label">
+                            Contact Person
+                        </span>
+
+                        <span class="organization-detail-value">
+                            ${escapeHtml(
+                                organization.contactPerson ||
+                                "-"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="organization-detail">
+
+                        <span class="organization-detail-label">
+                            Email
+                        </span>
+
+                        <span class="organization-detail-value">
+                            ${escapeHtml(
+                                organization.email ||
+                                "-"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="organization-detail">
+
+                        <span class="organization-detail-label">
+                            Contact
+                        </span>
+
+                        <span class="organization-detail-value">
+                            ${escapeHtml(
+                                organization.contactNumber ||
+                                "-"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="organization-detail">
+
+                        <span class="organization-detail-label">
+                            City
+                        </span>
+
+                        <span class="organization-detail-value">
+                            ${escapeHtml(
+                                organization.city ||
+                                "-"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="organization-detail">
+
+                        <span class="organization-detail-label">
+                            Address
+                        </span>
+
+                        <span class="organization-detail-value">
+                            ${escapeHtml(
+                                organization.address ||
+                                "-"
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="organization-actions">
+
+                    <button
+                        type="button"
+                        class="approve-button"
+                        data-action="approve"
+                        data-id="${organization._id}"
+                    >
+                        ✓ Approve Organization
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="reject-button"
+                        data-action="reject"
+                        data-id="${organization._id}"
+                    >
+                        ✕ Reject
+                    </button>
+
+                </div>
+
+            `;
+
+
+            return card;
+
+        }
+
+
+
+        /* =====================================================
+           BUTTON HANDLER
+           ===================================================== */
+
+        organizationGrid.addEventListener(
+            "click",
+            event => {
+
+                const button =
+                    event.target.closest(
+                        "button[data-action]"
+                    );
+
+
+                if (!button) {
+                    return;
+                }
+
+
+                const action =
+                    button.dataset.action;
+
+
+                const organizationId =
+                    button.dataset.id;
+
+
+                if (!organizationId) {
+                    return;
+                }
+
+
+                if (action === "approve") {
+
+                    approveOrganization(
+                        organizationId,
+                        button
+                    );
+
+                }
+
+
+                if (action === "reject") {
+
+                    rejectOrganization(
+                        organizationId,
+                        button
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           APPROVE
+           ===================================================== */
+
+        async function approveOrganization(
+            organizationId,
+            button
+        ) {
+
+            const confirmed =
+                confirm(
+                    "Approve this organization for MediShare?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            const token =
+                localStorage.getItem(
+                    "medishare_token"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Approving...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/organizations/${organizationId}/verify`,
+                        {
+                            method: "PATCH",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Approve response:",
+                    data
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        data.error ||
+                        "Approval failed."
+                    );
+
+                }
+
+
+                showMessage(
+                    "Organization approved successfully.",
+                    "success"
+                );
+
+
+                await loadPendingOrganizations();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Approval error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Failed to approve organization.",
+                    "error"
+                );
+
+
+                button.disabled = false;
+
+                button.textContent =
+                    "✓ Approve Organization";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           REJECT
+           ===================================================== */
+
+        async function rejectOrganization(
+            organizationId,
+            button
+        ) {
+
+            const confirmed =
+                confirm(
+                    "Reject this organization registration?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            const token =
+                localStorage.getItem(
+                    "medishare_token"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Rejecting...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/organizations/${organizationId}/reject`,
+                        {
+                            method: "PATCH",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Reject response:",
+                    data
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        data.error ||
+                        "Rejection failed."
+                    );
+
+                }
+
+
+                showMessage(
+                    "Organization rejected successfully.",
+                    "success"
+                );
+
+
+                await loadPendingOrganizations();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Rejection error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Failed to reject organization.",
+                    "error"
+                );
+
+
+                button.disabled = false;
+
+                button.textContent =
+                    "✕ Reject";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           SEARCH
+           ===================================================== */
+
+        organizationSearch.addEventListener(
+            "input",
+            () => {
+
+                renderOrganizations();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           REFRESH
+           ===================================================== */
+
+        refreshButton.addEventListener(
+            "click",
+            () => {
+
+                loadPendingOrganizations();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           LOGOUT
+           ===================================================== */
+
+        logoutButton.addEventListener(
+            "click",
+            () => {
+
+                logout();
+
+            }
+        );
+
+
+        function logout() {
+
+            localStorage.removeItem(
+                "medishare_token"
+            );
+
+            localStorage.removeItem(
+                "medishare_user"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        /* =====================================================
+           LOADING
+           ===================================================== */
+
+        function showLoading(show) {
+
+            adminLoading.style.display =
+                show ? "block" : "none";
+
+        }
+
+
+
+        /* =====================================================
+           MESSAGE
+           ===================================================== */
+
+        function showMessage(
+            message,
+            type
+        ) {
+
+            adminMessage.textContent =
+                message;
+
+            adminMessage.className =
+                `admin-message ${type}`;
+
+            adminMessage.style.display =
+                "block";
+
+        }
+
+
+        function hideMessage() {
+
+            adminMessage.style.display =
+                "none";
+
+        }
+
+
+
+        /* =====================================================
+           HTML ESCAPE
+           ===================================================== */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

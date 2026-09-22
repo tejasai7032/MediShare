@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | MediShare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =====================================
+         TOP NAVBAR
+    ====================================== -->
+
+    <header class="dashboard-navbar">
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                ✚
+            </div>
+
+            <div>
+
+                <h2>MediShare</h2>
+
+                <span>
+                    Healthcare Resource Network
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="dashboard-user">
+
+            <div class="user-avatar">
+                MS
+            </div>
+
+            <div class="user-details">
+
+                <strong id="userName">
+                    User
+                </strong>
+
+                <span id="userRole">
+                    Organization
+                </span>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         DASHBOARD LAYOUT
+    ====================================== -->
+
+    <div class="dashboard-layout">
+
+
+        <!-- =================================
+             SIDEBAR
+        ================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-label">
+                WORKSPACE
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link active"
+            >
+
+                <span>⌂</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+
+                <span>▣</span>
+
+                Resources
+
+            </a>
+
+
+            <a
+                href="rentals.html"
+                class="sidebar-link"
+            >
+
+                <span>⇄</span>
+
+                Rentals
+
+            </a>
+
+
+            <a
+                href="emergency.html"
+                class="sidebar-link"
+            >
+
+                <span>⚠</span>
+
+                Emergency
+
+            </a>
+
+
+            <a
+                href="blood.html"
+                class="sidebar-link"
+            >
+
+                <span>♥</span>
+
+                Blood Inventory
+
+            </a>
+
+
+            <div class="sidebar-divider"></div>
+
+
+            <div class="sidebar-label">
+                ORGANIZATION
+            </div>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+
+                <span>+</span>
+
+                Add Resource
+
+            </a>
+
+        </aside>
+
+
+
+        <!-- =================================
+             MAIN CONTENT
+        ================================== -->
+
+        <main class="dashboard-main">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="dashboard-heading">
+
+                <div>
+
+                    <span class="dashboard-eyebrow">
+                        ORGANIZATION DASHBOARD
+                    </span>
+
+                    <h1>
+                        Resource overview
+                    </h1>
+
+                    <p>
+                        Monitor your healthcare resources,
+                        rentals and emergency coordination.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="resources.html"
+                    class="dashboard-action"
+                >
+                    + Add Resource
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================
+                 STATISTICS
+            ================================== -->
+
+            <section class="dashboard-stats">
+
+
+                <!-- Resources -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        ▣
+                    </div>
+
+                    <div>
+
+                        <span>
+                            TOTAL RESOURCES
+                        </span>
+
+                        <strong id="resourceCount">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <small>
+                        Listed in network
+                    </small>
+
+                </div>
+
+
+
+                <!-- Rentals -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon teal">
+                        ⇄
+                    </div>
+
+                    <div>
+
+                        <span>
+                            RENTAL REQUESTS
+                        </span>
+
+                        <strong id="rentalCount">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <small>
+                        Current requests
+                    </small>
+
+                </div>
+
+
+
+                <!-- Emergency -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ⚠
+                    </div>
+
+                    <div>
+
+                        <span>
+                            EMERGENCY REQUESTS
+                        </span>
+
+                        <strong id="emergencyCount">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <small>
+                        Active requests
+                    </small>
+
+                </div>
+
+
+
+                <!-- Blood -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        ♥
+                    </div>
+
+                    <div>
+
+                        <span>
+                            BLOOD RECORDS
+                        </span>
+
+                        <strong id="bloodCount">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <small>
+                        Inventory records
+                    </small>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 DASHBOARD CONTENT
+            ================================== -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- RESOURCE NETWORK -->
+
+                <div class="dashboard-panel resource-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span>
+                                RESOURCE NETWORK
+                            </span>
+
+                            <h2>
+                                Available resources
+                            </h2>
+
+                        </div>
+
+                        <a href="resources.html">
+                            View all →
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        id="resourceList"
+                        class="dashboard-resource-list"
+                    >
+
+                        <div class="loading-state">
+                            Loading resources...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span>
+                                QUICK ACTIONS
+                            </span>
+
+                            <h2>
+                                Manage network
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <!-- Add Resource -->
+
+                        <a
+                            href="resources.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-action-icon">
+                                +
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Add Resource
+                                </strong>
+
+                                <span>
+                                    List medical equipment
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </a>
+
+
+
+                        <!-- Rentals -->
+
+                        <a
+                            href="rentals.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-action-icon">
+                                ⇄
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Rental Requests
+                                </strong>
+
+                                <span>
+                                    Manage equipment rentals
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </a>
+
+
+
+                        <!-- Emergency -->
+
+                        <a
+                            href="emergency.html"
+                            class="quick-action emergency-action"
+                        >
+
+                            <div class="quick-action-icon">
+                                ⚠
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Emergency Request
+                                </strong>
+
+                                <span>
+                                    Request critical resources
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </a>
+
+
+
+                        <!-- Blood -->
+
+                        <a
+                            href="blood.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-action-icon">
+                                ♥
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Blood Inventory
+                                </strong>
+
+                                <span>
+                                    Check blood availability
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 NETWORK STATUS
+            ================================== -->
+
+            <section class="network-status">
+
+                <div class="network-status-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        MediShare network connected
+                    </strong>
+
+                    <span>
+                        Your dashboard is connected to the
+                        live MediShare API and MongoDB.
+                    </span>
+
+                </div>
+
+                <div class="network-indicator">
+
+                    <span></span>
+
+                    Connected
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/app.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

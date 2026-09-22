@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Rentals | MediShare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <header class="dashboard-navbar">
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                ✚
+            </div>
+
+            <div>
+
+                <h2>
+                    MediShare
+                </h2>
+
+                <span>
+                    Healthcare Resource Network
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="dashboard-user">
+
+            <div class="user-avatar">
+                MS
+            </div>
+
+            <div class="user-details">
+
+                <strong id="userName">
+                    User
+                </strong>
+
+                <span id="userRole">
+                    Organization
+                </span>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         LAYOUT
+    ========================================== -->
+
+    <div class="dashboard-layout">
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+
+            <div class="sidebar-label">
+                WORKSPACE
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+            >
+
+                <span>
+                    ⌂
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+
+                <span>
+                    ▣
+                </span>
+
+                Resources
+
+            </a>
+
+
+            <a
+                href="rentals.html"
+                class="sidebar-link active"
+            >
+
+                <span>
+                    ⇄
+                </span>
+
+                Rentals
+
+            </a>
+
+
+            <a
+                href="emergency.html"
+                class="sidebar-link"
+            >
+
+                <span>
+                    ⚠
+                </span>
+
+                Emergency
+
+            </a>
+
+
+            <a
+                href="blood.html"
+                class="sidebar-link"
+            >
+
+                <span>
+                    ♥
+                </span>
+
+                Blood Inventory
+
+            </a>
+
+
+            <div class="sidebar-divider"></div>
+
+
+            <div class="sidebar-label">
+                ORGANIZATION
+            </div>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+
+                <span>
+                    +
+                </span>
+
+                Add Resource
+
+            </a>
+
+
+        </aside>
+
+
+
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="dashboard-main">
+
+
+            <!-- =================================
+                 HEADER
+            ================================== -->
+
+            <div class="dashboard-heading">
+
+                <div>
+
+                    <span class="dashboard-eyebrow">
+                        RESOURCE COORDINATION
+                    </span>
+
+
+                    <h1>
+                        Equipment rentals
+                    </h1>
+
+
+                    <p>
+                        Request and coordinate healthcare
+                        equipment across verified organizations.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="dashboard-action"
+                    id="showRentalForm"
+                    type="button"
+                    onclick="openRentalForm()"
+                >
+
+                    + New Rental Request
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================
+                 NEW RENTAL FORM
+            ================================== -->
+
+            <section
+                class="dashboard-panel rental-form-panel"
+                id="rentalFormPanel"
+                style="display: none;"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            RENTAL MANAGEMENT
+                        </span>
+
+
+                        <h2>
+                            New rental request
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    id="rentalForm"
+                >
+
+
+                    <div class="resource-form-grid">
+
+
+                        <!-- RESOURCE -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Healthcare Resource
+                            </label>
+
+
+                            <select
+                                id="resource"
+                                required
+                            >
+
+                                <option value="">
+                                    Select a resource
+                                </option>
+
+                            </select>
+
+
+                            <small
+                                id="resourcePrice"
+                                class="form-help"
+                            ></small>
+
+                        </div>
+
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Quantity
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="quantity"
+                                min="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- START DATE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Start Date
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="startDate"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- END DATE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                End Date
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="endDate"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- PURPOSE -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Purpose
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="purpose"
+                                placeholder="Why is this equipment required?"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- NOTES -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Notes
+                            </label>
+
+
+                            <textarea
+                                id="notes"
+                                rows="4"
+                                placeholder="Additional information..."
+                            ></textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="rentalMessage"
+                        class="form-message"
+                    ></div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="resource-form-actions">
+
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            onclick="closeRentalForm()"
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="dashboard-action"
+                        >
+
+                            <span>
+                                Submit Rental Request
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================
+                 REQUEST HISTORY
+            ================================== -->
+
+            <section class="dashboard-panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            RENTAL MANAGEMENT
+                        </span>
+
+
+                        <h2>
+                            Rental requests
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="rentalCount"
+                        class="resource-total"
+                    >
+                        0 requests
+                    </span>
+
+                </div>
+
+
+
+                <!-- REQUEST LIST -->
+
+                <div
+                    id="rentalList"
+                    class="rental-grid"
+                >
+
+                    <div class="loading-state">
+                        Loading rental requests...
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 NETWORK STATUS
+            ================================== -->
+
+            <div class="network-status">
+
+                <span class="status-dot"></span>
+
+                MediShare network connected
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =========================================
+         SCRIPTS
+    ========================================== -->
+
+    <script src="js/app.js"></script>
+
+    <script src="js/rentals.js"></script>
+
+
+
+    <!-- =========================================
+         PAGE HELPERS
+    ========================================== -->
+
+    <script>
+
+        function openRentalForm() {
+
+            const panel =
+                document.getElementById(
+                    "rentalFormPanel"
+                );
+
+            if (!panel) {
+                return;
+            }
+
+
+            panel.style.display =
+                "block";
+
+
+            panel.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        function closeRentalForm() {
+
+            const panel =
+                document.getElementById(
+                    "rentalFormPanel"
+                );
+
+            if (!panel) {
+                return;
+            }
+
+
+            panel.style.display =
+                "none";
+
+        }
+
+
+        /*
+         * Show the actual logged-in
+         * user in the navbar.
+         */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                const user =
+                    getUser();
+
+
+                if (!user) {
+                    return;
+                }
+
+
+                const userName =
+                    document.getElementById(
+                        "userName"
+                    );
+
+
+                const userRole =
+                    document.getElementById(
+                        "userRole"
+                    );
+
+
+                if (userName) {
+
+                    userName.textContent =
+                        user.name ||
+                        "User";
+
+                }
+
+
+                if (userRole) {
+
+                    userRole.textContent =
+                        user.role === "ADMIN"
+                            ? "Administrator"
+                            : "Organization";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Emergency | MediShare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="dashboard-navbar">
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                ✚
+            </div>
+
+            <div>
+
+                <h2>MediShare</h2>
+
+                <span>
+                    Healthcare Resource Network
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="dashboard-user">
+
+            <div class="user-avatar">
+                MS
+            </div>
+
+            <div class="user-details">
+
+                <strong id="userName">
+                    User
+                </strong>
+
+                <span id="userRole">
+                    Organization
+                </span>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         DASHBOARD LAYOUT
+    ====================================================== -->
+
+    <div class="dashboard-layout">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-label">
+                WORKSPACE
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+            >
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+                <span>▣</span>
+                Resources
+            </a>
+
+
+            <a
+                href="rentals.html"
+                class="sidebar-link"
+            >
+                <span>⇄</span>
+                Rentals
+            </a>
+
+
+            <a
+                href="emergency.html"
+                class="sidebar-link active"
+            >
+                <span>⚠</span>
+                Emergency
+            </a>
+
+
+            <a
+                href="blood.html"
+                class="sidebar-link"
+            >
+                <span>♥</span>
+                Blood Inventory
+            </a>
+
+
+            <div class="sidebar-divider"></div>
+
+
+            <div class="sidebar-label">
+                ORGANIZATION
+            </div>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+                <span>+</span>
+                Add Resource
+            </a>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main class="dashboard-main">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="dashboard-heading">
+
+                <div>
+
+                    <span class="dashboard-eyebrow">
+                        EMERGENCY COORDINATION
+                    </span>
+
+                    <h1>
+                        Emergency requests
+                    </h1>
+
+                    <p>
+                        Coordinate urgent healthcare resources
+                        across verified organizations.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="dashboard-action"
+                    id="showEmergencyForm"
+                    type="button"
+                    onclick="openEmergencyForm()"
+                >
+                    + New Emergency Request
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SEARCH / FILTER
+            ================================================== -->
+
+            <section class="emergency-toolbar">
+
+
+                <div class="emergency-search">
+
+                    <input
+                        type="text"
+                        id="emergencySearch"
+                        placeholder="Search emergency requests..."
+                    >
+
+                </div>
+
+
+                <select
+                    id="emergencyPriorityFilter"
+                >
+
+                    <option value="">
+                        All Priorities
+                    </option>
+
+                    <option value="LOW">
+                        Low
+                    </option>
+
+                    <option value="MEDIUM">
+                        Medium
+                    </option>
+
+                    <option value="HIGH">
+                        High
+                    </option>
+
+                    <option value="CRITICAL">
+                        Critical
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="emergencyStatusFilter"
+                >
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="PENDING">
+                        Pending
+                    </option>
+
+                    <option value="ACCEPTED">
+                        Accepted
+                    </option>
+
+                    <option value="REJECTED">
+                        Rejected
+                    </option>
+
+                    <option value="FULFILLED">
+                        Fulfilled
+                    </option>
+
+                    <option value="CANCELLED">
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NEW EMERGENCY REQUEST FORM
+            ================================================== -->
+
+            <section
+                class="dashboard-panel emergency-form-panel"
+                id="emergencyFormPanel"
+                style="display: none;"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            EMERGENCY MANAGEMENT
+                        </span>
+
+                        <h2>
+                            Create emergency request
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <form id="emergencyForm">
+
+
+                    <div class="emergency-form-grid">
+
+
+                        <!-- RESOURCE TYPE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Resource Type
+                            </label>
+
+                            <select
+                                id="resourceType"
+                                required
+                            >
+
+                                <option value="">
+                                    Select resource type
+                                </option>
+
+                                <option value="OT Equipment">
+                                    OT Equipment
+                                </option>
+
+                                <option value="Medical Equipment">
+                                    Medical Equipment
+                                </option>
+
+                                <option value="Ambulance">
+                                    Ambulance
+                                </option>
+
+                                <option value="Blood">
+                                    Blood
+                                </option>
+
+                                <option value="Hospital Bed">
+                                    Hospital Bed
+                                </option>
+
+                                <option value="Emergency Service">
+                                    Emergency Service
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- RESOURCE NAME -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Resource Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="resourceName"
+                                placeholder="Example: Ambulance"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Quantity Required
+                            </label>
+
+                            <input
+                                type="number"
+                                id="quantityRequired"
+                                min="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- PRIORITY -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Priority
+                            </label>
+
+                            <select
+                                id="priority"
+                                required
+                            >
+
+                                <option value="HIGH">
+                                    High
+                                </option>
+
+                                <option value="CRITICAL">
+                                    Critical
+                                </option>
+
+                                <option value="MEDIUM">
+                                    Medium
+                                </option>
+
+                                <option value="LOW">
+                                    Low
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- LOCATION -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Required Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="emergencyLocation"
+                                placeholder="Example: Vijayawada"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- CONTACT -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Contact Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="emergencyContact"
+                                placeholder="Emergency contact number"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- REASON -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Reason / Requirement
+                            </label>
+
+                            <textarea
+                                id="reason"
+                                rows="4"
+                                placeholder="Describe the emergency resource requirement..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div
+                        id="emergencyMessage"
+                        class="emergency-message"
+                        style="display: none;"
+                    ></div>
+
+
+
+                    <div class="emergency-form-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            onclick="closeEmergencyForm()"
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="dashboard-action"
+                        >
+                            <span>
+                                Submit Emergency Request
+                            </span>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 EMERGENCY REQUEST LIST
+            ================================================== -->
+
+            <section class="dashboard-panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            EMERGENCY NETWORK
+                        </span>
+
+                        <h2>
+                            Active emergency requests
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="emergencyCount"
+                        class="resource-total"
+                    >
+                        0 requests
+                    </span>
+
+                </div>
+
+
+
+                <!-- REQUEST LIST -->
+
+                <div
+                    id="emergencyList"
+                    class="emergency-grid"
+                >
+
+                    <div class="loading-state">
+                        Loading emergency requests...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NETWORK STATUS
+            ================================================== -->
+
+            <div class="network-status">
+
+                <span class="status-dot"></span>
+
+                MediShare emergency network connected
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SCRIPTS
+    ====================================================== -->
+
+    <script src="js/app.js"></script>
+
+    <script src="js/emergency.js"></script>
+
+
+
+    <!-- =====================================================
+         PAGE HELPERS
+    ====================================================== -->
+
+    <script>
+
+        function openEmergencyForm() {
+
+            const panel =
+                document.getElementById(
+                    "emergencyFormPanel"
+                );
+
+
+            if (!panel) {
+                return;
+            }
+
+
+            panel.style.display =
+                "block";
+
+
+            panel.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        function closeEmergencyForm() {
+
+            const panel =
+                document.getElementById(
+                    "emergencyFormPanel"
+                );
+
+
+            if (!panel) {
+                return;
+            }
+
+
+            panel.style.display =
+                "none";
+
+        }
+
+
+        /*
+         * Display the logged-in
+         * organization/user.
+         */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                const user =
+                    typeof getUser === "function"
+                        ? getUser()
+                        : null;
+
+
+                if (!user) {
+                    return;
+                }
+
+
+                const userName =
+                    document.getElementById(
+                        "userName"
+                    );
+
+
+                const userRole =
+                    document.getElementById(
+                        "userRole"
+                    );
+
+
+                if (userName) {
+
+                    userName.textContent =
+                        user.name ||
+                        "User";
+
+                }
+
+
+                if (userRole) {
+
+                    userRole.textContent =
+                        user.role === "ADMIN"
+                            ? "Administrator"
+                            : "Organization";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

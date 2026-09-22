@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account | MediShare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body class="register-page">
+
+    <div class="register-wrapper">
+
+        <!-- =========================================
+             LEFT INFORMATION PANEL
+        ========================================== -->
+
+        <section class="register-info">
+
+            <div class="register-brand">
+
+                <div class="register-brand-mark">
+                    M
+                </div>
+
+                <div>
+                    <strong>MediShare</strong>
+
+                    <span>
+                        Healthcare Resource Network
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="register-info-content">
+
+                <span class="register-eyebrow">
+                    JOIN THE NETWORK
+                </span>
+
+                <h1>
+                    Connect healthcare resources.
+                    <span>
+                        When they matter most.
+                    </span>
+                </h1>
+
+                <p>
+                    Register your healthcare organization
+                    and connect with the MediShare network
+                    for medical resource sharing,
+                    rentals, and emergency coordination.
+                </p>
+
+
+                <div class="register-benefits">
+
+                    <div class="register-benefit">
+
+                        <div class="register-benefit-icon">
+                            ✓
+                        </div>
+
+                        <div>
+                            <strong>
+                                Healthcare Network
+                            </strong>
+
+                            <span>
+                                Connect your organization
+                                with other healthcare providers.
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="register-benefit">
+
+                        <div class="register-benefit-icon">
+                            +
+                        </div>
+
+                        <div>
+                            <strong>
+                                Share Medical Resources
+                            </strong>
+
+                            <span>
+                                List equipment, ambulances,
+                                blood availability and other
+                                healthcare resources.
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="register-benefit">
+
+                        <div class="register-benefit-icon">
+                            !
+                        </div>
+
+                        <div>
+                            <strong>
+                                Emergency Coordination
+                            </strong>
+
+                            <span>
+                                Coordinate urgent healthcare
+                                resource requests efficiently.
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="register-brand-footer">
+
+                <span>
+                    © 2026 MediShare
+                </span>
+
+                <span>
+                    Healthcare Resource Coordination
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             RIGHT REGISTRATION PANEL
+        ========================================== -->
+
+        <section class="register-panel">
+
+            <div class="register-panel-header">
+
+                <span class="register-eyebrow">
+                    ORGANIZATION REGISTRATION
+                </span>
+
+                <h2>
+                    Create your account
+                </h2>
+
+                <p>
+                    Register your organization to join
+                    the MediShare healthcare network.
+                </p>
+
+            </div>
+
+
+            <!-- =====================================
+                 REGISTRATION FORM
+            ====================================== -->
+
+            <form
+                id="registerForm"
+                class="register-form"
+            >
+
+                <!-- ACCOUNT DETAILS -->
+
+                <div class="register-section">
+
+                    <div class="register-section-title">
+
+                        <span class="register-section-number">
+                            01
+                        </span>
+
+                        <span>
+                            Account Details
+                        </span>
+
+                    </div>
+
+
+                    <div class="register-grid">
+
+                        <!-- NAME -->
+
+                        <div class="register-field">
+
+                            <label for="userName">
+                                Your Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="userName"
+                                name="userName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="register-field">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="organization@example.com"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="register-field">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Minimum 6 characters"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required
+                            >
+
+                            <span class="register-password-note">
+                                Use at least 6 characters.
+                            </span>
+
+                        </div>
+
+
+                        <!-- CONFIRM PASSWORD -->
+
+                        <div class="register-field">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ORGANIZATION DETAILS -->
+
+                <div class="register-section">
+
+                    <div class="register-section-title">
+
+                        <span class="register-section-number">
+                            02
+                        </span>
+
+                        <span>
+                            Organization Details
+                        </span>
+
+                    </div>
+
+
+                    <!-- ORGANIZATION NAME -->
+
+                    <div class="register-field register-field-full">
+
+                        <label for="organizationName">
+                            Organization Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="organizationName"
+                            name="organizationName"
+                            placeholder="Enter organization name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="register-grid">
+
+                        <!-- ORGANIZATION TYPE -->
+
+                        <div class="register-field">
+
+                            <label for="organizationType">
+                                Organization Type
+                            </label>
+
+                            <select
+                                id="organizationType"
+                                name="organizationType"
+                                required
+                            >
+
+                                <option value="">
+                                    Select organization type
+                                </option>
+
+                                <option value="Hospital">
+                                    Hospital
+                                </option>
+
+                                <option value="Clinic">
+                                    Clinic
+                                </option>
+
+                                <option value="Blood Bank">
+                                    Blood Bank
+                                </option>
+
+                                <option value="Diagnostic Center">
+                                    Diagnostic Center
+                                </option>
+
+                                <option value="Ambulance Service">
+                                    Ambulance Service
+                                </option>
+
+                                <option value="Medical Supplier">
+                                    Medical Supplier
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- REGISTRATION NUMBER -->
+
+                        <div class="register-field">
+
+                            <label for="registrationNumber">
+                                Registration Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="registrationNumber"
+                                name="registrationNumber"
+                                placeholder="Organization registration ID"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- CONTACT PERSON -->
+
+                        <div class="register-field">
+
+                            <label for="contactPerson">
+                                Contact Person
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contactPerson"
+                                name="contactPerson"
+                                placeholder="Primary contact person"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- CONTACT NUMBER -->
+
+                        <div class="register-field">
+
+                            <label for="contactNumber">
+                                Contact Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="contactNumber"
+                                name="contactNumber"
+                                placeholder="Phone number"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="register-field register-field-full">
+
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            rows="3"
+                            placeholder="Full organization address"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- CITY -->
+
+                    <div class="register-field register-field-full">
+
+                        <label for="city">
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="City"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     ACCOUNT CREATION NOTICE
+                ================================== -->
+
+                <div class="register-notice">
+
+                    <div class="register-notice-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Account ready to use
+                        </strong>
+
+                        <p>
+                            Your account will be created
+                            immediately. After registration,
+                            you can start using MediShare
+                            and access your dashboard.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     MESSAGE
+                ================================== -->
+
+                <div
+                    id="registerMessage"
+                    class="auth-message"
+                    hidden
+                ></div>
+
+
+                <!-- =================================
+                     SUBMIT BUTTON
+                ================================= -->
+
+                <button
+                    type="submit"
+                    id="registerButton"
+                    class="register-button"
+                >
+
+                    <span class="button-text">
+                        Create Account
+                    </span>
+
+                    <span
+                        class="button-loading"
+                        hidden
+                    >
+
+                        <span class="button-spinner"></span>
+
+                        Creating Account...
+
+                    </span>
+
+                </button>
+
+
+                <!-- LOGIN LINK -->
+
+                <p class="register-login-link">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Sign in
+                    </a>
+
+                </p>
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+    <!-- REGISTER JAVASCRIPT -->
+
+    <script src="js/register.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resources | MediShare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- NAVBAR -->
+
+    <header class="dashboard-navbar">
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                ✚
+            </div>
+
+            <div>
+
+                <h2>MediShare</h2>
+
+                <span>
+                    Healthcare Resource Network
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="dashboard-user">
+
+            <div class="user-avatar">
+                MS
+            </div>
+
+            <div class="user-details">
+
+                <strong id="userName">
+                    User
+                </strong>
+
+                <span id="userRole">
+                    Organization
+                </span>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- LAYOUT -->
+
+    <div class="dashboard-layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-label">
+                WORKSPACE
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+            >
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link active"
+            >
+                <span>▣</span>
+                Resources
+            </a>
+
+
+            <a
+                href="rentals.html"
+                class="sidebar-link"
+            >
+                <span>⇄</span>
+                Rentals
+            </a>
+
+
+            <a
+                href="emergency.html"
+                class="sidebar-link"
+            >
+                <span>⚠</span>
+                Emergency
+            </a>
+
+
+            <a
+                href="blood.html"
+                class="sidebar-link"
+            >
+                <span>♥</span>
+                Blood Inventory
+            </a>
+
+
+            <div class="sidebar-divider"></div>
+
+
+            <div class="sidebar-label">
+                ORGANIZATION
+            </div>
+
+
+            <a
+                href="resources.html"
+                class="sidebar-link"
+            >
+                <span>+</span>
+                Add Resource
+            </a>
+
+        </aside>
+
+
+
+        <!-- MAIN -->
+
+        <main class="dashboard-main">
+
+
+            <!-- HEADER -->
+
+            <div class="dashboard-heading">
+
+                <div>
+
+                    <span class="dashboard-eyebrow">
+                        RESOURCE NETWORK
+                    </span>
+
+                    <h1>
+                        Healthcare resources
+                    </h1>
+
+                    <p>
+                        Discover and manage medical equipment,
+                        emergency resources and healthcare assets.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="dashboard-action"
+                    id="showAddResource"
+                >
+                    + Add Resource
+                </button>
+
+            </div>
+
+
+
+            <!-- SEARCH / FILTER -->
+
+            <section class="resource-toolbar">
+
+                <div class="resource-search">
+
+                    <input
+                        type="text"
+                        id="resourceSearch"
+                        placeholder="Search resources..."
+                    >
+
+                </div>
+
+
+                <select id="categoryFilter">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    <option value="OT Equipment">
+                        OT Equipment
+                    </option>
+
+                    <option value="Medical Equipment">
+                        Medical Equipment
+                    </option>
+
+                    <option value="Ambulance">
+                        Ambulance
+                    </option>
+
+                    <option value="Blood">
+                        Blood
+                    </option>
+
+                    <option value="Hospital Bed">
+                        Hospital Bed
+                    </option>
+
+                    <option value="Emergency Service">
+                        Emergency Service
+                    </option>
+
+                </select>
+
+
+                <select id="availabilityFilter">
+
+                    <option value="">
+                        All Availability
+                    </option>
+
+                    <option value="available">
+                        Available
+                    </option>
+
+                    <option value="rental">
+                        Rental Available
+                    </option>
+
+                    <option value="emergency">
+                        Emergency Available
+                    </option>
+
+                </select>
+
+            </section>
+
+
+
+            <!-- ADD RESOURCE PANEL -->
+
+            <section
+                class="dashboard-panel add-resource-panel"
+                id="addResourcePanel"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            RESOURCE MANAGEMENT
+                        </span>
+
+                        <h2>
+                            Add a healthcare resource
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <form id="resourceForm">
+
+
+                    <div class="resource-form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Resource Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="resourceName"
+                                placeholder="Example: Hospital Bed"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Category
+                            </label>
+
+                            <select
+                                id="resourceCategory"
+                                required
+                            >
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="OT Equipment">
+                                    OT Equipment
+                                </option>
+
+                                <option value="Medical Equipment">
+                                    Medical Equipment
+                                </option>
+
+                                <option value="Ambulance">
+                                    Ambulance
+                                </option>
+
+                                <option value="Blood">
+                                    Blood
+                                </option>
+
+                                <option value="Hospital Bed">
+                                    Hospital Bed
+                                </option>
+
+                                <option value="Emergency Service">
+                                    Emergency Service
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                id="resourceQuantity"
+                                min="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Available Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                id="availableQuantity"
+                                min="0"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="resourceLocation"
+                                placeholder="Example: Vijayawada"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Contact Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contactNumber"
+                                placeholder="Organization contact"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea
+                                id="resourceDescription"
+                                placeholder="Describe the resource..."
+                                rows="4"
+                            ></textarea>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Price Per Day
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pricePerDay"
+                                min="0"
+                                value="0"
+                            >
+
+                        </div>
+
+
+
+                        <div class="resource-checkboxes">
+
+                            <label class="checkbox-item">
+
+                                <input
+                                    type="checkbox"
+                                    id="rentalAvailable"
+                                >
+
+                                <span>
+                                    Available for rental
+                                </span>
+
+                            </label>
+
+
+                            <label class="checkbox-item">
+
+                                <input
+                                    type="checkbox"
+                                    id="emergencyAvailable"
+                                >
+
+                                <span>
+                                    Available for emergency requests
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div
+                        id="resourceMessage"
+                        class="form-message"
+                    ></div>
+
+
+
+                    <div class="resource-form-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancelResource"
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="dashboard-action"
+                            id="saveResource"
+                        >
+
+                            <span>
+                                Save Resource
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- RESOURCE LIST -->
+
+            <section class="dashboard-panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            LIVE NETWORK
+                        </span>
+
+                        <h2>
+                            Available resources
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="resourceTotal"
+                        class="resource-total"
+                    >
+                        0 resources
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="resourceGrid"
+                    class="resource-grid"
+                >
+
+                    <div class="loading-state">
+                        Loading resources...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <script src="js/app.js"></script>
+
+    <script src="js/resources.js"></script>
+
+
+</body>
+
+</html>

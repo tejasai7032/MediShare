@@ -1,0 +1,146 @@
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+
+const resourceRoutes =
+    require("./routes/resourceRoutes");
+
+const organizationRoutes =
+    require("./routes/organizationRoutes");
+
+const emergencyRequestRoutes =
+    require("./routes/emergencyRequestRoutes");
+
+const rentalRequestRoutes =
+    require("./routes/rentalRequestRoutes");
+
+const bloodInventoryRoutes =
+    require("./routes/bloodInventoryRoutes");
+
+const authRoutes =
+    require("./routes/authRoutes");
+
+
+const app = express();
+
+
+// =========================================
+// MIDDLEWARE
+// =========================================
+
+app.use(cors());
+
+app.use(
+    express.json()
+);
+
+
+// =========================================
+// FRONTEND STATIC FILES
+// =========================================
+
+app.use(
+    express.static(
+        path.join(__dirname, "../frontend")
+    )
+);
+
+
+// =========================================
+// API ROUTES
+// =========================================
+
+app.use(
+    "/api/resources",
+    resourceRoutes
+);
+
+app.use(
+    "/api/organizations",
+    organizationRoutes
+);
+
+app.use(
+    "/api/emergency-requests",
+    emergencyRequestRoutes
+);
+
+app.use(
+    "/api/rental-requests",
+    rentalRequestRoutes
+);
+
+app.use(
+    "/api/blood-inventory",
+    bloodInventoryRoutes
+);
+
+app.use(
+    "/api/auth",
+    authRoutes
+);
+
+
+// =========================================
+// API ROOT
+// =========================================
+
+app.get(
+    "/api",
+    (req, res) => {
+
+        res.json({
+            application:
+                "MediShare",
+
+            message:
+                "Healthcare Resource Sharing Platform API",
+
+            status:
+                "running"
+        });
+
+    }
+);
+
+
+// =========================================
+// HEALTH CHECK
+// =========================================
+
+app.get(
+    "/api/health",
+    (req, res) => {
+
+        res.json({
+            status:
+                "healthy",
+
+            application:
+                "MediShare",
+
+            database:
+                "MongoDB"
+        });
+
+    }
+);
+
+
+// =========================================
+// FRONTEND ROOT
+// =========================================
+
+app.get(
+    "/",
+    (req, res) => {
+
+        res.redirect(
+            "/login.html"
+        );
+
+    }
+);
+
+
+module.exports = app;
